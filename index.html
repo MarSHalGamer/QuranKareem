@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سورة الزمر</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #16213e;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 320px;
+        }
+
+        h1 {
+            color: #e94560;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        button {
+            background-color: #0f3460;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #e94560;
+        }
+
+        .verse-section {
+            margin-top: 15px;
+            border-top: 1px solid #0f3460;
+            padding-top: 15px;
+        }
+
+        input {
+            width: 70px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #0f3460;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>سورة الزمر</h1>
+
+        <!-- عنصر الصوت المخفي الذي يستدعي ملف MP3 -->
+        <audio id="quranAudio" src="audio.mp3"></audio>
+
+        <!-- أزرار التشغيل والتحكم الأساسية -->
+        <div class="controls">
+            <button onclick="playAudio()" title="تشغيل">▶</button>
+            <button onclick="pauseAudio()" title="إيقاف مؤقت">❚❚</button>
+            <button onclick="restartAudio()" title="إعادة من بداية السورة">↻</button>
+        </div>
+
+        <!-- قسم الانتقال إلى ثانية محددة (آية معينة) -->
+        <div class="verse-section">
+            <p>الانتقال بالثواني:</p>
+            <input type="number" id="timeInput" placeholder="الثانية" min="0">
+            <button onclick="jumpToTime()">ذهاب</button>
+        </div>
+    </div>
+
+    <script>
+        // التعرّف على مشغّل الصوت في الصفحة
+        const audio = document.getElementById('quranAudio');
+
+        // 1. أمر التشغيل
+        function playAudio() {
+            audio.play();
+        }
+
+        // 2. أمر الإيقاف المؤقت
+        function pauseAudio() {
+            audio.pause();
+        }
+
+        // 3. أمر الإعادة من البداية
+        function restartAudio() {
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        // 4. أمر الانتقال لثانية معينة
+        function jumpToTime() {
+            const seconds = document.getElementById('timeInput').value;
+            if (seconds !== "") {
+                audio.currentTime = seconds; // تغيير وقت المشغل إلى الثانية المحددة
+                audio.play();
+            }
+        }
+    </script>
+
+</body>
+</html>
