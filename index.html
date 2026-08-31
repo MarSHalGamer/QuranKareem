@@ -71,7 +71,7 @@
             margin-bottom: 25px;
         }
 
-        /* --- واجهة اختيار السور --- */
+        /* واجهة اختيار السور */
         #selectionView {
             display: flex;
             flex-direction: column;
@@ -86,7 +86,7 @@
             border-radius: 12px;
             font-size: 20px;
             font-weight: 700;
-            pointer-events: none; /* مستطيل لا يمكن ضغطه */
+            pointer-events: none;
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
         }
 
@@ -109,9 +109,9 @@
             box-shadow: 0 8px 20px rgba(184, 134, 11, 0.6);
         }
 
-        /* --- واجهة المشغل --- */
+        /* واجهة المشغل */
         #playerView {
-            display: none; /* مخفية في البداية */
+            display: none;
         }
 
         .surah-badge {
@@ -191,7 +191,6 @@
         .btn i { font-size: 16px; }
         .btn-full { grid-column: span 2; }
 
-        /* زر العودة لقائمة السور */
         .back-btn {
             background: transparent;
             border: 1px solid #d4af37;
@@ -216,8 +215,8 @@
         <!-- 1. واجهة اختيار السورة -->
         <div id="selectionView">
             <div class="header-box">اختر سورة</div>
-            <button class="surah-select-btn" onclick="openSurah('سورة الزمر', 'audio.mp3')">سورة الزمر</button>
-            <button class="surah-select-btn" onclick="openSurah('سورة ص', 'sad.mp3')">سورة ص</button>
+            <button class="surah-select-btn" onclick="openSurah('سورة ص', '038.mp3')">سورة ص</button>
+            <button class="surah-select-btn" onclick="openSurah('سورة الزمر', '039.mp3')">سورة الزمر</button>
         </div>
 
         <!-- 2. واجهة المشغل -->
@@ -271,7 +270,6 @@
         const playerView = document.getElementById('playerView');
         const currentSurahTitle = document.getElementById('currentSurahTitle');
 
-        // فتح واجهة المشغل والسورة المحددة
         function openSurah(title, audioFile) {
             currentSurahTitle.textContent = title;
             audio.src = audioFile;
@@ -280,254 +278,12 @@
             audio.play();
         }
 
-        // العودة لشاشة اختيار السور
         function goBackToSelection() {
             audio.pause();
             audio.currentTime = 0;
             playerView.style.display = 'none';
             selectionView.style.display = 'flex';
         }
-
-        function playAudio() { audio.play(); }
-        function pauseAudio() { audio.pause(); }
-        function restartAudio() { audio.currentTime = 0; audio.play(); }
-        function forward10() { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); }
-        function rewind10() { audio.currentTime = Math.max(0, audio.currentTime - 10); }
-
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return "00:00";
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-
-        audio.addEventListener('timeupdate', () => {
-            if (audio.duration) {
-                seekSlider.value = (audio.currentTime / audio.duration) * 100;
-                currentTimeElem.textContent = formatTime(audio.currentTime);
-                durationTimeElem.textContent = formatTime(audio.duration);
-            }
-        });
-
-        seekSlider.addEventListener('input', () => {
-            if (audio.duration) {
-                audio.currentTime = (seekSlider.value / 100) * audio.duration;
-            }
-        });
-    </script>
-
-</body>
-</html>            background: rgba(30, 1, 4, 0.98);
-            border-radius: 25px;
-            /* ظل قوي وعميق لإعطاء عمق للكارت */
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
-            padding: 40px 30px;
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            /* إضافة إطار زخرفي خارجي ذهبي */
-            border: 3px solid;
-            border-image: linear-gradient(135deg, #ffd700, #b8860b, #d4af37) 1;
-        }
-
-        /* إضافة زخرفة ركنية مذهبة (Pseudo-elements) */
-        .player-card::before, .player-card::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border: 2px solid;
-            border-image: linear-gradient(135deg, #ffd700, #b8860b) 1;
-        }
-
-        .player-card::before { top: 10px; right: 10px; border-bottom: none; border-left: none; }
-        .player-card::after { bottom: 10px; left: 10px; border-top: none; border-right: none; }
-
-        .main-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 38px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            /* تأثير الذهب المتدرج للنص الإنجليزي */
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 2px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .sub-title {
-            font-family: 'Amiri', serif;
-            font-size: 14px;
-            color: #d1b168; /* لون ذهبي باهت */
-            font-weight: 400;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-        }
-
-        .surah-badge {
-            font-family: 'Amiri', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: #ffffff;
-            /* خلفية ذهبية منحنية متدرجة */
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.4) 50%, rgba(212, 175, 55, 0.1) 100%);
-            border-top: 2px solid #ffd700;
-            border-bottom: 2px solid #ffd700;
-            padding: 8px 0;
-            margin-bottom: 35px;
-            border-radius: 10px;
-            text-shadow: 0 0 10px #ffd700;
-            position: relative;
-        }
-
-        /* زخرفة داخلية لسورة الزمر */
-        .surah-badge::before {
-            content: '﴿';
-            position: absolute;
-            left: 20px;
-            color: #ffd700;
-        }
-        .surah-badge::after {
-            content: '﴾';
-            position: absolute;
-            right: 20px;
-            color: #ffd700;
-        }
-
-        .progress-container {
-            margin-bottom: 30px;
-        }
-
-        .slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            border-radius: 5px;
-            background: #4a0d15; /* لون أحمر غامق */
-            outline: none;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #ffd700;
-            cursor: pointer;
-            box-shadow: 0 0 15px #ffd700;
-            transition: transform 0.2s;
-        }
-
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.3);
-        }
-
-        .time-display {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: #d1b168;
-            margin-top: 8px;
-            direction: ltr;
-        }
-
-        .controls-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .btn {
-            /* خلفية زر متدرجة فخمة */
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
-            color: #1a0002;
-            border: none;
-            padding: 16px 10px;
-            font-size: 16px;
-            font-family: 'Amiri', serif;
-            font-weight: 700;
-            border-radius: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 6px 15px rgba(184, 134, 11, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(184, 134, 11, 0.6);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-            background: #d4af37;
-        }
-
-        .btn i {
-            font-size: 18px;
-        }
-
-        .btn-full {
-            grid-column: span 2;
-            background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="player-card">
-        <h1 class="main-title">QURAN KAREEM</h1>
-        <div class="sub-title">صنع بواسطة عبدالقادر</div>
-
-        <div class="surah-badge">سورة الزمر</div>
-
-        <audio id="quranAudio" src="039.mp3"></audio>
-
-        <div class="progress-container">
-            <input type="range" id="seekSlider" class="slider" value="0" min="0" max="100">
-            <div class="time-display">
-                <span id="currentTime">00:00</span>
-                <span id="durationTime">00:00</span>
-            </div>
-        </div>
-
-        <div class="controls-grid">
-            <button class="btn" onclick="playAudio()">
-                <i class="fa-solid fa-play"></i> تشغيل
-            </button>
-            
-            <button class="btn" onclick="pauseAudio()">
-                <i class="fa-solid fa-pause"></i> إيقاف مؤقت
-            </button>
-
-            <button class="btn" onclick="rewind10()">
-                <i class="fa-solid fa-rotate-left"></i> الرجوع 10 ثواني
-            </button>
-
-            <button class="btn" onclick="forward10()">
-                <i class="fa-solid fa-rotate-right"></i> التقدم 10 ثواني
-            </button>
-
-            <button class="btn btn-full" onclick="restartAudio()">
-                <i class="fa-solid fa-arrows-rotate"></i> إعادة من البداية
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const audio = document.getElementById('quranAudio');
-        const seekSlider = document.getElementById('seekSlider');
-        const currentTimeElem = document.getElementById('currentTime');
-        const durationTimeElem = document.getElementById('durationTime');
 
         function playAudio() { audio.play(); }
         function pauseAudio() { audio.pause(); }
