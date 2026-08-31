@@ -25,7 +25,6 @@
             justify-content: center;
             font-family: 'Amiri', serif;
             background: radial-gradient(circle at center, #2e0104 0%, #1a0002 100%);
-            background-image: url('https://www.transparenttextures.com/patterns/black-linen.png');
         }
 
         .player-card {
@@ -37,30 +36,15 @@
             width: 90%;
             max-width: 400px;
             position: relative;
-            border: 3px solid;
-            border-image: linear-gradient(135deg, #ffd700, #b8860b, #d4af37) 1;
+            border: 3px solid #d4af37;
         }
-
-        .player-card::before, .player-card::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid;
-            border-image: linear-gradient(135deg, #ffd700, #b8860b) 1;
-        }
-
-        .player-card::before { top: 10px; right: 10px; border-bottom: none; border-left: none; }
-        .player-card::after { bottom: 10px; left: 10px; border-top: none; border-right: none; }
 
         .main-title {
             font-family: 'Montserrat', sans-serif;
             font-size: 34px;
             font-weight: 800;
             letter-spacing: 2px;
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffd700;
             margin-bottom: 2px;
         }
 
@@ -71,7 +55,6 @@
             margin-bottom: 25px;
         }
 
-        /* واجهة اختيار السور */
         #selectionView {
             display: flex;
             flex-direction: column;
@@ -87,7 +70,6 @@
             font-size: 20px;
             font-weight: 700;
             pointer-events: none;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
         }
 
         .surah-select-btn {
@@ -101,15 +83,8 @@
             border-radius: 15px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(184, 134, 11, 0.4);
-            transition: all 0.3s ease;
         }
 
-        .surah-select-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(184, 134, 11, 0.6);
-        }
-
-        /* واجهة المشغل */
         #playerView {
             display: none;
         }
@@ -119,18 +94,13 @@
             font-size: 28px;
             font-weight: 700;
             color: #ffffff;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.4) 50%, rgba(212, 175, 55, 0.1) 100%);
+            background: rgba(212, 175, 55, 0.2);
             border-top: 2px solid #ffd700;
             border-bottom: 2px solid #ffd700;
             padding: 6px 0;
             margin-bottom: 25px;
             border-radius: 10px;
-            text-shadow: 0 0 10px #ffd700;
-            position: relative;
         }
-
-        .surah-badge::before { content: '﴿'; position: absolute; left: 15px; color: #ffd700; }
-        .surah-badge::after { content: '﴾'; position: absolute; right: 15px; color: #ffd700; }
 
         .progress-container { margin-bottom: 25px; }
 
@@ -141,18 +111,15 @@
             border-radius: 5px;
             background: #4a0d15;
             outline: none;
-            cursor: pointer;
         }
 
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
             width: 18px;
             height: 18px;
             border-radius: 50%;
             background: #ffd700;
             cursor: pointer;
-            box-shadow: 0 0 15px #ffd700;
         }
 
         .time-display {
@@ -184,11 +151,8 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.4);
         }
 
-        .btn:active { transform: translateY(0); }
-        .btn i { font-size: 16px; }
         .btn-full { grid-column: span 2; }
 
         .back-btn {
@@ -201,9 +165,7 @@
             cursor: pointer;
             margin-top: 15px;
             font-family: 'Amiri', serif;
-            transition: 0.2s;
         }
-        .back-btn:hover { background: rgba(212, 175, 55, 0.2); color: #ffd700; }
     </style>
 </head>
 <body>
@@ -212,14 +174,14 @@
         <h1 class="main-title">QURAN KAREEM</h1>
         <div class="sub-title">صنع ب عبدالقادر</div>
 
-        <!-- 1. واجهة اختيار السورة -->
+        <!-- واجهة اختيار السورة -->
         <div id="selectionView">
             <div class="header-box">اختر سورة</div>
             <button class="surah-select-btn" onclick="openSurah('سورة ص', '038.mp3')">سورة ص</button>
             <button class="surah-select-btn" onclick="openSurah('سورة الزمر', '039.mp3')">سورة الزمر</button>
         </div>
 
-        <!-- 2. واجهة المشغل -->
+        <!-- واجهة المشغل -->
         <div id="playerView">
             <div class="surah-badge" id="currentSurahTitle">سورة الزمر</div>
 
